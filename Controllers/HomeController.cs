@@ -1,16 +1,19 @@
 using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using WebProject.Models;
+using System.Threading.Tasks;
 
 namespace WebProject.Controllers;
 
 public class HomeController : Controller
 {
     private readonly ILogger<HomeController> _logger;
+    private readonly IEmailSender _emailSender;
 
-    public HomeController(ILogger<HomeController> logger)
+    public HomeController(ILogger<HomeController> logger, IEmailSender emailSender)
     {
         _logger = logger;
+        _emailSender = emailSender;
     }
 
     public IActionResult Index()
@@ -62,5 +65,19 @@ public class HomeController : Controller
     {
         return View("/Views/Shared/home-03.cshtml");
     }
-    
+
+    [HttpPost]
+    public async Task<IActionResult> Subscribe(string email)
+    {
+        if (string.IsNullOrEmpty(email))
+        {
+            return BadRequest("Email is required.");
+        }
+
+        var subject = "Thank you for subscribing!";
+        var message = "<p>Dear user,</p><p>Thank you for subscribing to our newsletter!</p>";
+        await _emailSender.SendEmailAsync(email, subject, message);
+
+        return Ok("Subscription successful.");
+    }
 }
