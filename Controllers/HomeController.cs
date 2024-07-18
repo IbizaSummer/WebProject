@@ -17,15 +17,50 @@ public class HomeController : Controller
     {
         return View();
     }
-
-    public IActionResult Privacy()
+    
+    public IActionResult ShoppingCart()
     {
-        return View();
+        return View("/Views/Shared/shoping-cart.cshtml");
     }
-
-    [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-    public IActionResult Error()
+    
+    public IActionResult Product()
     {
-        return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        return View("/Views/Shared/product.cshtml");
     }
+    
+    public IActionResult ProductDetail()
+    {
+        return View("/Views/Shared/product-detail.cshtml");
+    }
+    
+    public IActionResult About()
+    {
+        return View("/Views/Shared/about.cshtml");
+    }
+    
+    public IActionResult Contact()
+    {
+        return View("/Views/Shared/contact.cshtml");
+    }
+    
+    public IActionResult Blog()
+    {
+        return View("/Views/Shared/blog.cshtml");
+    }
+    
+    public IActionResult BlogDetail()
+    {
+        return View("/Views/Shared/blog-detail.cshtml");
+    }
+    
+    public IActionResult Home02()
+    {
+        return View("/Views/Shared/home-02.cshtml");
+    }
+    
+    public IActionResult Home03()
+    {
+        return View("/Views/Shared/home-03.cshtml");
+    }
+    
 }
